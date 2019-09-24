@@ -105,14 +105,18 @@ int word(char filename[]){ //返回文件词的数目
 	char fchar = 0;
 	int count = 0;
 	fchar = fgetc(f);
-	for (count = 0; fchar != EOF; fchar = fgetc(f)){
-		if(fchar >= 'a' && fchar <= 'z' || fchar >= 'A' && fchar <= 'Z')
-			for (; fchar >= 'a' && fchar <= 'z' || fchar >= 'A' && fchar <= 'Z' || fchar == ' ' || fchar == '\n';) {
-				if (fchar == ' ' || fchar == '\n') {
-					count++;
-				}
+	while (fchar != EOF)
+	{
+		if ((fchar >= 'a' && fchar <= 'z') || (fchar >= 'A' && fchar <= 'Z') )//遇到字母
+		{
+			while ((fchar >= 'a' && fchar <= 'z') || (fchar >= 'A' && fchar <= 'Z'))
 				fchar = fgetc(f);
-			}
+			count++;
+			fchar = fgetc(f);
+		}
+		else {
+			fchar = fgetc(f);
+		}
 	}
 	fclose(f);
 	return count;
